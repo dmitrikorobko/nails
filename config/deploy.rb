@@ -1,5 +1,32 @@
-set :application, 'my_app_name'
-set :repo_url, 'git@example.com:me/my_repo.git'
+# deploy.rb from https://github.com/roots/bedrock-capistrano modified by Björn Folbert, https://gist.github.com/folbert/
+
+# Folbert-comment: from Capistrano doc:
+# Here we'd set the name of the application, must be in a format that's safe for
+# filenames on your target operating system.
+set :application, 'nailympia'
+
+# Folbert-comment: use the SSH url for the repo from GitHub
+set :repo_url, 'git@github.com:dmitrikorobko/nails.git'
+
+# Folbert-addition: name of the dir where theme is placed. Not the entire path.
+set :theme_directory_name, 'nailympia'
+
+# Folbert-addition. Use in case composer command does not work.
+# Set value to point to where you put composer.phar on remote server.
+# https://discourse.roots.io/t/deploying-wordpress-with-capistrano-screencast/863/25
+# SSHKit.config.command_map[:composer] = "~/bin/composer.phar"
+
+# Folbert-comment: this should be set to the target directory of the deploy on the server.
+# So if your site is placed in /home/few/sites/bedrock-test.com/, that is the path to use.
+# Make sure the path starts at the root directory and doesn't end with a /
+set :deploy_to, -> { "/data02/virt71673/domeenid/www.nailympia.eu" }
+
+# Folbert-addition. We must change tmp dir since Oderland does not allow us to execute files placed in /tmp/
+# Set it to a nice place, preferrably outside any public folders. Should not end with a /
+set :tmp_dir, "/data02/virt71673/domeenid/www.nailympia.eu/bed_temp"
+
+# Use :debug for more verbose output when troubleshooting, Default is :info
+set :log_level, :info
 
 # Branch options
 # Prompts for the branch name (defaults to current branch)
@@ -7,18 +34,23 @@ set :repo_url, 'git@example.com:me/my_repo.git'
 
 # Hardcodes branch to always be master
 # This could be overridden in a stage config file
-set :branch, :master
+set :branch, :main
 
-set :deploy_to, -> { "/srv/www/#{fetch(:application)}" }
-
-# Use :debug for more verbose output when troubleshooting
-set :log_level, :info
+# Folbert addition. Disable forward agent for, what appears to be, increased security
+set :ssh_options, {
+  :forward_agent => false
+}
 
 # Apache users with .htaccess files:
-# it needs to be added to linked_files so it persists across deploys:
-# set :linked_files, fetch(:linked_files, []).push('.env', 'web/.htaccess')
-set :linked_files, fetch(:linked_files, []).push('.env')
+# the .htaccess needs to be added to linked_files so it persists across deploys:
+set :linked_files, fetch(:linked_files, []).push('.env', 'web/.htaccess')
 set :linked_dirs, fetch(:linked_dirs, []).push('web/app/uploads')
+
+# FEW Additions. There shouldnt be any need to change anything here
+set :theme_path, Pathname.new('web/app/themes').join(fetch(:theme_directory_name))
+set :local_app_path, Pathname.new(Dir.pwd)
+set :local_theme_path, fetch(:local_app_path).join(fetch(:theme_path))
+set :local_dist_path, fetch(:local_theme_path).join('dist')
 
 namespace :deploy do
   desc 'Restart application'
@@ -59,3 +91,59 @@ end
 # Note that you need to have WP-CLI installed on your server
 # Uncomment the following line to run it on deploys if needed
 # after 'deploy:publishing', 'deploy:update_option_paths'
+
+# Folbert-addition
+# Code below will make sure that gulp --production is run on deploy and assets uploaded. This assumes
+# that you are using the Sage starter theme or anything else that has a production Gulp task.
+# after release directory has been created but before symlink is changed.
+# This is based on https://gist.github.com/jaywilliams/c0abbec89ef6bc81cb49
+# https://discourse.roots.io/t/using-bedrock-sage-to-deploy-with-capistrano-theme-gulp-dist-files/3325/15
+# https://discourse.roots.io/t/using-bedrock-sage-to-deploy-with-capistrano-theme-gulp-dist-files/3325/20
+
+namespace :deploy do
+
+  task :compile do
+    #puts "Running gulp --production on local theme path #{fetch(:local_theme_path)} "
+    run_locally do
+      # FEW-modification: execute gulp on absolute path
+      execute "cd #{fetch(:local_theme_path)}; yarn build:production"
+    end
+  end
+
+  task :copy do
+    on roles(:web) do
+
+      # Remote Paths (Lazy-load until actual deploy)
+      set :remote_dist_path, -> { release_path.join(fetch(:theme_path)).join('dist') }
+
+      puts "Your local distribution path: #{fetch(:local_dist_path)} "
+      puts "Your remote distribution path: #{fetch(:remote_dist_path)} "
+      puts "Uploading files to remote "
+      upload! fetch(:local_dist_path).to_s, fetch(:remote_dist_path), recursive: true
+    end
+  end
+
+  task assets: %w(compile copy)
+
+end
+
+# Folbert Addition. The below tasks give us a way to deploy only assets by running deploy:assetsonly
+
+namespace :deploy do
+
+  task :copyonly do
+    on roles(:web) do
+
+      set :remote_dist_path, -> { release_path.join(fetch(:theme_path)) }
+      puts "Your local distribution path: #{fetch(:local_dist_path)} "
+      puts "Your remote distribution path: #{fetch(:remote_dist_path)} "
+      puts "Uploading files to remote "
+      upload! fetch(:local_dist_path).to_s, fetch(:remote_dist_path), recursive: true
+    end
+  end
+
+  task assetsonly: %w(deploy:compile copyonly)
+
+end
+
+after 'deploy:updated', 'deploy:assets'
