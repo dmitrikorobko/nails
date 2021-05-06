@@ -11,6 +11,8 @@ set :repo_url, 'git@github.com:dmitrikorobko/nails.git'
 # Folbert-addition: name of the dir where theme is placed. Not the entire path.
 set :theme_directory_name, 'nailympia'
 
+set :keep_releases, 2
+
 # Folbert-addition. Use in case composer command does not work.
 # Set value to point to where you put composer.phar on remote server.
 # https://discourse.roots.io/t/deploying-wordpress-with-capistrano-screencast/863/25

@@ -79,6 +79,20 @@ div {
   }
 }
 
+.um-login {
+  &.uimob500 {
+    .um-half {
+      &.um-left {
+        width: 39%;
+      }
+
+      &.um-right {
+        width: 60%;
+      }
+    }
+  }
+}
+
 .um input[type=submit].um-button,
 .um input[type=submit].um-button:focus,
 .um a.um-button,
