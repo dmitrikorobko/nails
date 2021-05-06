@@ -1,0 +1,140 @@
+section {
+  &.judge-rules {
+    h2 {
+      font-size: 2.25rem;
+      margin-top: 4rem;
+      margin-bottom: 4rem;
+      text-align: center;
+      text-transform: uppercase;
+    }
+  }
+}
+
+.row {
+  &.devision {
+    .title {
+      font-weight: 500;
+      padding-bottom: 0.825rem;
+    }
+
+    border-top: solid 1px $grey;
+    margin-top: 2rem;
+    margin-left: 0;
+    margin-right: 0;
+    padding-top: 2rem;
+
+    &:last-child {
+      padding-bottom: 2rem;
+      border-bottom: solid 1px $grey;
+    }
+
+    h2 {
+      font-size: 1.188rem;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    >.col-12 {
+      padding-left: 0;
+      padding-right: 0;
+
+      .row {
+        border-bottom: solid 1px $grey;
+        padding-bottom: 1.5rem;
+        padding-top: 1.5rem;
+
+        &:first-child {
+          padding-top: 0;
+        }
+
+        &:last-child {
+          border-bottom: 0;
+          padding-bottom: 0;
+        }
+      }
+    }
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    p {
+      margin-bottom: 0;
+    }
+  }
+
+  &.nomination {
+    a {
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
+    &.online {
+      h2 {
+        padding-top: 6rem;
+        padding-bottom: 0;
+        border-bottom: 0;
+      }
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      text-transform: uppercase;
+      padding-bottom: 2.25rem;
+      padding-top: 2rem;
+      margin-bottom: 0;
+      border-bottom: solid 1px $grey;
+    }
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: solid 1px $grey;
+      width: 100%;
+
+      li {
+        width: 50%;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+
+        &:last-child {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+.h3-nomination {
+  font-size: 1.188rem;
+  text-transform: uppercase;
+  margin-bottom: 0;
+  border-bottom: solid 1px $grey;
+  padding-bottom: 1.5rem;
+  padding-top: 3.2rem;
+}
+
+@include media-breakpoint-up(md) {
+  .row {
+    &.nomination {
+      ul {
+        li {
+          width: 20%;
+
+          &:last-child {
+            width: 60%;
+          }
+        }
+      }
+    }
+  }
+}

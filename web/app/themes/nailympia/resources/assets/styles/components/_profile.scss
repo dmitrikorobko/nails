@@ -1,0 +1,87 @@
+// UM
+
+.um-account {
+  margin-top: 4rem;
+}
+
+.um-account-meta img {
+  width: 100%;
+  margin-bottom: 1.5rem !important;
+}
+
+.um-account-nav a {
+  color: $black;
+  text-transform: uppercase;
+  letter-spacing: 0.03rem;
+}
+
+.um-account-heading {
+  color: $black !important;
+  text-transform: uppercase;
+  letter-spacing: 0.03rem;
+  font-size: 1.75rem !important;
+  font-weight: 400 !important;
+}
+
+.um-account-main div.um-account-heading i {
+  font-size: 40px;
+}
+
+.profile-info {
+  color: $black;
+
+  .row {
+    width: 100%;
+  }
+
+  h3 {
+    color: $black;
+    text-transform: uppercase;
+    letter-spacing: 0.03rem;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .main-info {
+    margin-bottom: 3rem;
+
+    ul {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      border-bottom: 1px solid $grey;
+      padding: 1.8rem 0 2rem;
+
+      li {
+        margin-right: 0.5rem;
+      }
+    }
+  }
+
+  .nominations {
+    ul {
+      padding: 0 0 2rem;
+
+      li {
+        padding: 2rem 0;
+        border-bottom: 1px solid $grey;
+      }
+    }
+  }
+}
+
+@include media-breakpoint-up(md) {
+  .profile-info {
+    .main-info {
+      ul {
+        li {
+          margin-right: 2.5rem;
+        }
+      }
+    }
+  }
+}
