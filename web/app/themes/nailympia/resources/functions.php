@@ -298,29 +298,51 @@ function account_additional_fields(){
     $custom_fields = [
         "field_6080792b7dc7d" => __('Phone','sage'),
     ];
+
+    if(is_user_role('judge')){  
+        $custom_fields['field_6081a017220dd'] = __('Description', 'sage');
+    }
+
     foreach ($custom_fields as $k => $title) {
+
+        $field_object = get_field_object($k);
+        
+        $field_type = $field_object['type'];
+
         $fields[ $k ] = array(
             'title' => $title,
             'metakey' => $k,
-            'type' => 'select',
+            'type' => $field_object['type'],
             'label' => $title,
         );
         apply_filters('um_account_secure_fields', $fields, get_current_user_id());
  
         $val = get_field($k, 'user_'.get_current_user_id() ) ? get_field($k, 'user_'.get_current_user_id() ) : '';
- 
+        
+        $input = '';
+
+        if($field_type == 'textarea') {
+            $input = '<textarea class="um-form-field valid" name="'.$k.'" id="user_'.$k.'" " rows="8">'.$val.'</textarea>';
+        } else {
+            $input = '<input class="um-form-field valid " type="'. $field_object['type'] .'" name="'.$k.'" id="user_'.$k.'" value="'.$val.'" placeholder="'.$title.'" data-validate="" data-key="'.$k.'">';
+        }
+
         $html = '<div class="um-field um-field-text  um-field-'.$k.' um-field-text um-field-type_text" data-key="'.$k.'">
                 <div class="um-field-label">
                     <label for="user_'.$k.'">'.$title.'</label>
                     <div class="um-clear"></div>
                 </div>
                 <div class="um-field-area">
-                    <input class="um-form-field valid " type="text" name="'.$k.'" id="user_'.$k.'" value="'.$val.'" placeholder="'.$title.'" data-validate="" data-key="'.$k.'">
+
+                    '. $input .'
                 </div>
             </div>';
-        echo $html;
+        echo $html; ?>
+        
+        <?  
     }
 
+    
 }
 
 
@@ -330,6 +352,9 @@ add_action('um_account_pre_update_profile', 'account_additional_fields_update', 
  
 function account_additional_fields_update(){
     $fields = ['field_6080792b7dc7d'];
+    if(is_user_role('judge')){
+        array_push($fields, 'field_6081a017220dd');
+    }
     foreach( $fields as $f ){
         update_field( $f, $_POST[$f], 'user_'.get_current_user_id() );
     }
@@ -344,3 +369,18 @@ function Redirect($url, $permanent = false)
 
     exit();
 }
+
+function is_user_role($is_role){
+    $user_id = get_current_user_id();
+    $user_meta=get_userdata($user_id);
+    $user_roles=$user_meta->roles;
+    $user_role = $user_roles[0];
+
+    return ($user_role == $is_role) ? true : false;
+}
+
+/*
+add_action( 'um_after_account_page_load', 'my_after_account_page_load', 10 );
+function my_after_account_page_load() {
+    acf_form_head();
+}*/

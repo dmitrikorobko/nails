@@ -45,3 +45,14 @@
 
   </div>
 </header>
+<?php if(is_front_page()): ?>
+<section class="header-banner">
+  <div class="container">
+    <div class="row">
+    <div class="col-12">
+       <img src="<?= get_field('banner', 'option')['url']; ?>"></a>
+    </div>
+    </div>
+  </div>
+</section>
+<?php endif; ?>

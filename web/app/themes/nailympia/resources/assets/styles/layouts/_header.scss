@@ -6,6 +6,12 @@
   @extend .nav-link;
 }
 
+.header-banner {
+  img {
+    width: 100%;
+  }
+}
+
 .topbar {
   background-color: $grey;
   padding-top: 0.5rem;

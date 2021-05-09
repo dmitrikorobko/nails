@@ -38,6 +38,26 @@
                 @else
                 @endif @php wp_reset_query(); @endphp
             @endif
+            @if($form==='judge')
+                <div class="col-12 col-lg-4 form-group">
+                    <label for="name" class="required">{{ __('Name and surname','sage') }}</label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                </div>
+                <div class="col-12 col-lg-4 form-group">
+                    <label for="company">{{ __('Company name','sage') }}</label>
+                    <input type="text" class="form-control" id="company" name="company">
+                </div>
+            @endif
+            @if($form==='sponsor')
+                <div class="col-12 col-lg-4 form-group">
+                    <label for="invoiceCompany" class="required">{{ __('Company name','sage') }}</label>
+                    <input type="text" class="form-control" id="invoiceCompany" name="invoiceCompany" required>
+                </div>
+                <div class="col-12 col-lg-4 form-group">
+                    <label for="reg" class="required">{{ __('Registration number','sage') }}</label>
+                    <input type="text" class="form-control" id="reg" name="reg" required>
+                </div>
+            @endif
         </div>
         <div class="row">
             <div class="col-12 col-lg-4">
@@ -87,7 +107,7 @@
                     {{ __('Passwords missmatch or length less than 6 characters','sage') }}
                 </div>
             </div>
-            @if($form==='participant' || 'judge')
+            @if($form === 'participant' || $form === 'judge')
             <div class="col-12 col-lg-4 d-sm-none d-md-flex">
             </div>
             <div class="col-12 col-lg-4 form-group">
@@ -96,7 +116,7 @@
             </div>
             @endif
         </div>
-        @if($form==='participant' || 'sponsor')
+        @if($form === 'participant' || $form === 'sponsor')
         <div class="row">
             <div class="col-12 col-lg-4">
                 <h3>{{ __('Invoice','sage') }}</h3>
@@ -163,12 +183,15 @@
             @if($form==='judge')
             <div class="col-12 col-lg-4 form-group">
                 <label for="regalia" class="required">{{ __('Regalia','sage') }}</label>
-                <textarea class="form-control" id="regalia" rows="3" required></textarea>
+                <textarea class="form-control" id="regalia" name="regalia" rows="5" required></textarea>
             </div>
             <div class="col-12 col-lg-4 form-group">
                 <label for="profileImage" class="required">{{ __('Profile photo','sage') }}</label>
                 <input type="file" class="form-control-file" id="profileImage" name="profileImage" required>
                 <small id="profileImageHelp" class="form-text text-muted">{{ __('Minimum size - 400X500 px, Maximum filesize - 5mb','sage') }}</small>
+                <div class="invalid-feedback">
+                    {{ __('Please add file!','sage') }}
+                </div>
             </div>
             @endif
             @if($form==='sponsor')
@@ -186,10 +209,14 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="packageRadios" id="package-{{ get_field('nr') }}" value="{{$id}}" >
                                 <label class="form-check-label" for="package-{{ get_field('nr') }}">
-                                    {{ esc_html( get_the_title() ) }}
+                                    {{ esc_html( get_the_title() ) }}@if(!empty(get_field('price'))) - {{ get_field('price') }}€@endif
                                 </label>
                             </div>
                         @endwhile
+                    <p class="mt-3">
+                        <a href="#" class="more">Подробнее о пакетах</a>
+                    </p>
+                    
                 </div>
                 @php wp_reset_postdata(); @endphp
             @else
@@ -198,6 +225,9 @@
                 <label for="companyLogo" class="required">{{ __('Company logo','sage') }}</label>
                 <input type="file" class="form-control-file" id="companyLogo" name="companyLogo" required>
                 <small id="profileImageHelp" class="form-text text-muted">{{ __('Maximum filesize - 5mb','sage') }}</small>
+                <div class="invalid-feedback">
+                    {{ __('Please add file!','sage') }}
+                </div>
             </div>
             @endif
         </div>

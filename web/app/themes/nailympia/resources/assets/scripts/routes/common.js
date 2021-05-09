@@ -84,6 +84,11 @@ export default {
         fileValidation();
       }
 
+      if(form.id === 'judge'){
+
+        fileValidation();
+      }
+
       if(form.id === 'participant'){
         teamsAutocomplete()
         calculatePrice();
@@ -120,7 +125,7 @@ export default {
               validated = false;
           }
 
-          if ( this.files[0].type !== 'image/jpeg' && this.files[0].type !== 'image/png' && this.files[0].type !== 'image/gif') {
+          if ( this.files[0].type !== 'image/jpeg' && this.files[0].type !== 'image/png' && this.files[0].type !== 'image/gif' && this.files[0].type !== 'image/svg+xml') {
 
               alert('Invalid image type!')
               validated = false;
@@ -361,9 +366,9 @@ export default {
           let invoiceFor = document.getElementById("invoiceFor").value;
           if(invoiceFor != 'private'){
             if(invoiceFor === 'eu-legal'){
-              document.querySelector('#invoice-additional-reg').classList.add('hide');
               document.querySelector('#invoice-additional-vat').classList.remove('hide');
               if(form.id === 'participant'){
+                document.querySelector('#invoice-additional-reg').classList.add('hide');
                 document.querySelectorAll('#invoice-additional').forEach(div => div.classList.remove('hide'));
               }
             } else {
@@ -371,6 +376,9 @@ export default {
                 document.querySelector('#invoice-additional-vat').classList.add('hide');
                 document.querySelector('#invoice-additional-reg').classList.remove('hide');
                 document.querySelectorAll('#invoice-additional').forEach(div => div.classList.remove('hide'));
+              }
+              if(form.id === 'sponsor'){
+                document.querySelector('#invoice-additional-vat').classList.add('hide');
               }
             }
           } else {

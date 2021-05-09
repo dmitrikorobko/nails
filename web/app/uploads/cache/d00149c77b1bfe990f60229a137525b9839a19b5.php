@@ -38,6 +38,26 @@
                 <?php else: ?>
                 <?php endif; ?> <?php wp_reset_query(); ?>
             <?php endif; ?>
+            <?php if($form==='judge'): ?>
+                <div class="col-12 col-lg-4 form-group">
+                    <label for="name" class="required"><?php echo e(__('Name and surname','sage')); ?></label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                </div>
+                <div class="col-12 col-lg-4 form-group">
+                    <label for="company"><?php echo e(__('Company name','sage')); ?></label>
+                    <input type="text" class="form-control" id="company" name="company">
+                </div>
+            <?php endif; ?>
+            <?php if($form==='sponsor'): ?>
+                <div class="col-12 col-lg-4 form-group">
+                    <label for="invoiceCompany" class="required"><?php echo e(__('Company name','sage')); ?></label>
+                    <input type="text" class="form-control" id="invoiceCompany" name="invoiceCompany" required>
+                </div>
+                <div class="col-12 col-lg-4 form-group">
+                    <label for="reg" class="required"><?php echo e(__('Registration number','sage')); ?></label>
+                    <input type="text" class="form-control" id="reg" name="reg" required>
+                </div>
+            <?php endif; ?>
         </div>
         <div class="row">
             <div class="col-12 col-lg-4">
@@ -88,7 +108,7 @@
 
                 </div>
             </div>
-            <?php if($form==='participant' || 'judge'): ?>
+            <?php if($form === 'participant' || $form === 'judge'): ?>
             <div class="col-12 col-lg-4 d-sm-none d-md-flex">
             </div>
             <div class="col-12 col-lg-4 form-group">
@@ -97,7 +117,7 @@
             </div>
             <?php endif; ?>
         </div>
-        <?php if($form==='participant' || 'sponsor'): ?>
+        <?php if($form === 'participant' || $form === 'sponsor'): ?>
         <div class="row">
             <div class="col-12 col-lg-4">
                 <h3><?php echo e(__('Invoice','sage')); ?></h3>
@@ -165,12 +185,16 @@
             <?php if($form==='judge'): ?>
             <div class="col-12 col-lg-4 form-group">
                 <label for="regalia" class="required"><?php echo e(__('Regalia','sage')); ?></label>
-                <textarea class="form-control" id="regalia" rows="3" required></textarea>
+                <textarea class="form-control" id="regalia" name="regalia" rows="5" required></textarea>
             </div>
             <div class="col-12 col-lg-4 form-group">
                 <label for="profileImage" class="required"><?php echo e(__('Profile photo','sage')); ?></label>
                 <input type="file" class="form-control-file" id="profileImage" name="profileImage" required>
                 <small id="profileImageHelp" class="form-text text-muted"><?php echo e(__('Minimum size - 400X500 px, Maximum filesize - 5mb','sage')); ?></small>
+                <div class="invalid-feedback">
+                    <?php echo e(__('Please add file!','sage')); ?>
+
+                </div>
             </div>
             <?php endif; ?>
             <?php if($form==='sponsor'): ?>
@@ -188,11 +212,14 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="packageRadios" id="package-<?php echo e(get_field('nr')); ?>" value="<?php echo e($id); ?>" >
                                 <label class="form-check-label" for="package-<?php echo e(get_field('nr')); ?>">
-                                    <?php echo e(esc_html( get_the_title() )); ?>
-
+                                    <?php echo e(esc_html( get_the_title() )); ?><?php if(!empty(get_field('price'))): ?> - <?php echo e(get_field('price')); ?>€<?php endif; ?>
                                 </label>
                             </div>
                         <?php endwhile; ?>
+                    <p class="mt-3">
+                        <a href="#" class="more">Подробнее о пакетах</a>
+                    </p>
+                    
                 </div>
                 <?php wp_reset_postdata(); ?>
             <?php else: ?>
@@ -201,6 +228,10 @@
                 <label for="companyLogo" class="required"><?php echo e(__('Company logo','sage')); ?></label>
                 <input type="file" class="form-control-file" id="companyLogo" name="companyLogo" required>
                 <small id="profileImageHelp" class="form-text text-muted"><?php echo e(__('Maximum filesize - 5mb','sage')); ?></small>
+                <div class="invalid-feedback">
+                    <?php echo e(__('Please add file!','sage')); ?>
+
+                </div>
             </div>
             <?php endif; ?>
         </div>

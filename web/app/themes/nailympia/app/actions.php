@@ -18,10 +18,12 @@ class Ajax extends Controller
 
     function register_user(){
 
+        /*
         ini_set('display_errors', '1');
         ini_set('display_startup_errors', '1');
         error_reporting(E_ALL);
-
+        */
+        
         $success = false;
         $message = '';
 
@@ -31,8 +33,11 @@ class Ajax extends Controller
         $user_pass = stripcslashes($_POST['password1']);
         $user_nice_name = strtolower($_POST['email']);
         $user_role = stripcslashes($_POST['user-type']);
-        $user_display_name = stripcslashes($_POST['name']);   
-        $user_first_last =  $this->parse_name(stripcslashes($_POST['name']));
+        if($_POST['name']){
+            $user_display_name = stripcslashes($_POST['name']);   
+            $user_first_last =  $this->parse_name(stripcslashes($_POST['name']));
+        }
+
         
         $user_phone = stripcslashes($_POST['phone']);
         $reg_address = stripcslashes($_POST['address']);
@@ -71,17 +76,38 @@ class Ajax extends Controller
 
         }
 
-
-
         //Participant & Judge
         if($is_participant || $is_judge){
             $represent_country = stripcslashes($_POST['countryRepresent']);
         }
-   
+        
+
+        // Judge 
+
+        if($is_judge){
+            $company_name = stripcslashes($_POST['company']);
+            $regalia = stripcslashes($_POST['regalia']);
+        }
 
         //Sponsor (invoicing)
         if($is_sponsor){
+            
+            $user_display_name = stripcslashes($_POST['invoiceCompany']);
+            $user_first_last =  $this->parse_name(stripcslashes($_POST['invoiceCompany']));
             $invoice_for =  stripcslashes($_POST['invoiceFor']);
+
+            $sponsor_package_id =  stripcslashes($_POST['packageRadios']);
+
+
+            $total_price =  get_field('field_60819d6393b13', $sponsor_package_id);
+
+            $company_name = stripcslashes($_POST['invoiceCompany']);
+            $company_reg_nr = stripcslashes($_POST['reg']);
+            $company_vat = stripcslashes($_POST['vat']);
+            $company_country = stripcslashes($_POST['country']);
+            $add_temp = $_POST['city'] . ' ' . $_POST['postcode'];
+            $company_full_address = stripcslashes($add_temp);
+
         }
 
         $user_data = array(
@@ -96,10 +122,11 @@ class Ajax extends Controller
             
         );
 
+        
         $user_id = wp_insert_user($user_data);
 
             if (!is_wp_error($user_id)) {
-                
+
                 if($is_participant) {
                     $this->add_participant($user_id, $devision, $represent_country, $all_nominations, $team);
 
@@ -111,6 +138,19 @@ class Ajax extends Controller
 
                     $profile_image_id = $this->insert_attachment('profileImage', 'user_'.$user_id.'', 'field_60813af2e4e0e');
                 }
+
+                if($is_judge){
+                    $this->add_judge($user_id, $represent_country, $company_name, $regalia);
+
+                    $profile_image_id = $this->insert_attachment('profileImage', 'user_'.$user_id.'', 'field_60813af2e4e0e');
+                }
+
+                if($is_sponsor){
+                    $this->add_invoice_data($invoice_for, $user_id, $company_full_address, '', $company_country, '', $company_name, $company_reg_nr, $company_vat, $total_price);
+                    $this->add_sponsor($user_id, $sponsor_package_id);
+                    $logo_id = $this->insert_attachment('companyLogo', 'user_'.$user_id.'', 'field_608199fdbbf29');
+                }
+
                 $this->add_additional_user_data($user_id, $reg_address, $reg_city, $reg_country, $reg_postcode, $user_phone);
 
                 $success = true;
@@ -124,17 +164,13 @@ class Ajax extends Controller
             }
 
         wp_send_json([
-                'nominations' => $all_nominations,
                 'success' => $success,
                 'message' => $message,
-                'username' => $user_name,
-                'name' => $user_display_name,
-                'country' => $_POST['country'],
-                'pass' => $_POST['password1'],
-                'user-type' => $_POST['user-type']
+                'username' => $user_name
             ]
         );
         
+
         wp_die();
     }
 
@@ -166,10 +202,25 @@ class Ajax extends Controller
             return [$parts[0], $parts[1]];
     }
     
+    private function add_sponsor($user_id,  $sponsor_package_id){
+        $user = 'user_'.$user_id.'';
+        $package_object = get_post($sponsor_package_id);
+        update_field( 'field_609540d373261', $package_object, $user);
+    }
+
+    private function add_judge($user_id, $country, $company, $regalia){
+
+        $user = 'user_'.$user_id.'';
+
+        update_user_meta( $user_id, '_sliced_client_business', $company );
+        update_field( 'field_6081a017220dd', $regalia, $user);
+        update_field( 'field_608e8353b5a19', $country, $user);
+    }
+
     private function add_participant($user_id, $devision, $country, $all_nominations, $team){
         $user = 'user_'.$user_id.'';
         $devision_object =  get_post( $devision );
-        $team_object = $this->add_create_team($team, $user_id);
+        
         $nominations_array = [];
 
         foreach($all_nominations as $nomination){
@@ -189,9 +240,14 @@ class Ajax extends Controller
             array_push($nominations_array, $temp_array);
         }
 
+        if(!empty($team)){
+            $team_object = $this->add_create_team($team, $user_id);
+            update_field( 'field_609192499a8f9', $team_object, $user );
+        }
+        
 
         update_field( 'field_60819af1f75d0', $devision_object, $user ); 
-        update_field( 'field_609192499a8f9', $team_object, $user );
+
         update_field( 'field_608e8353b5a19', $country, $user);
         update_field( 'field_608164444c690', $nominations_array, $user );
         

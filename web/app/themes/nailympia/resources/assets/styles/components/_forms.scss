@@ -18,6 +18,20 @@
   @extend .btn-secondary;
 }
 
+.um-form {
+  .acf-button {
+    position: relative;
+    display: block;
+    width: auto !important;
+  }
+
+  .acf-fields {
+    .acf-field {
+      padding: 1rem 0;
+    }
+  }
+}
+
 .role-chooser {
   padding-top: 3rem;
 
@@ -35,6 +49,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-bottom: 2rem;
 
       &:hover {
         border-color: $green;
@@ -270,13 +285,18 @@
         font-size: 0.875rem;
         height: 2.5rem;
 
-        &#profileImage {
+        &#profileImage,
+        &#companyLogo {
           background: none;
         }
 
         &:-internal-autofill-selected {
           background-color: #fff;
         }
+      }
+
+      input[type="radio"] {
+        height: auto;
       }
     }
 

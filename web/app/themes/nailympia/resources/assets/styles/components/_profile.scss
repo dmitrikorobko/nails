@@ -2,6 +2,23 @@
 
 .um-account {
   margin-top: 4rem;
+
+  .evaluation-criteria {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+
+    h2 {
+      text-transform: uppercase;
+      letter-spacing: 0.03rem;
+      font-size: 1.75rem;
+      margin-bottom: 2rem;
+    }
+
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: $black;
+    text-align: left;
+  }
 }
 
 .um-account-meta img {
