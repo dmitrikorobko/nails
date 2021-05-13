@@ -75,6 +75,18 @@
 
       li {
         margin-right: 0.5rem;
+
+        &.invoice {
+          img {
+            width: 25px;
+            height: auto;
+            margin-right: 5px;
+          }
+
+          a:hover {
+            text-decoration: underline;
+          }
+        }
       }
     }
   }

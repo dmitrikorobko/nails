@@ -4,6 +4,7 @@ $user_id = um_user( 'ID' );
 $user_meta=get_userdata($user_id);
 $user_roles=$user_meta->roles;
 $user_role = $user_roles[0];
+$user_invoice = false;
 $is_participant = ($user_role == "participant") ? true : false;
 $is_judge = ($user_role == "judge") ? true : false;
 $is_sponsor = ($user_role == "sponsor") ? true : false;
@@ -19,6 +20,9 @@ if ($is_sponsor){
 	$image = get_field('field_608199fdbbf29', 'user_'.um_user( 'ID' ).'');
 }
 
+if ($is_participant || $is_sponsor){
+	$user_invoice = get_field('field_60819a5fbfc6c', 'user_'.$user_id.'');
+}
 
 ?>
 
@@ -187,13 +191,18 @@ if ($is_sponsor){
 								<?php if($team_object) { ?>
 									<li><? echo __('Team','sage')?>: <? echo $team_object->post_title; ?></li>
 								<?php }?>
-								
+								<?if($is_participant && $user_invoice) {?>
+									<li class="invoice"><img src="<?= ASSETS; ?>/images/invoice.svg"><a href="<?echo get_permalink($user_invoice->ID)?>" target="_blank"><? echo __('Invoice','sage')?></a></li>
+								<?}?>
 							</ul>
 							<?}?>
 							<?if($is_sponsor) {?>
 								<ul>
 								<li><? echo __('Package','sage')?>: №<? echo get_field('field_60819d4c93b11', $package_object->ID)?> - <?php echo $package_object->post_title;?></li>
 								<li><? echo __('Package Price','sage')?>: <?php echo get_field('field_60819d6393b13', $package_object->ID)?>€</li>
+								<?if($user_invoice) {?>
+									<li class="invoice"><img src="<?= ASSETS; ?>/images/invoice.svg"><a href="<?echo get_permalink($user_invoice->ID)?>" target="_blank"><? echo __('Invoice','sage')?></a></li>
+								<?}?>
 								</ul>
 							<?}?>
 						</div>
