@@ -5,7 +5,7 @@ Tags: Export WordPress, Migrate WordPress, WordPress database plugin, WordPress 
 Requires at least: 5.2
 Tested up to: 5.7
 Requires PHP: 5.6
-Stable tag: 2.0
+Stable tag: 2.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,6 +14,8 @@ Make WordPress migration easy. Migrate your database at the click of a button wi
 == Description ==
 
 WP Migrate DB takes the hassle out of moving your WordPress site.
+
+https://deliciousbrains.wistia.com/medias/5co63n4jqq
 
 WP Migrate DB is a WordPress migration plugin that makes exporting and migrating your database easy, fast, and straightforward.
 
@@ -65,7 +67,9 @@ Glad you asked! WP Migrate DB Pro is the perfect accompaniment to any WordPress 
 
 And that's just the tip of the iceberg, we're always working on adding value to WP Migrate DB Pro!
 
-Find out about the [incredible value that WP Migrate DB Pro brings on our website](https://deliciousbrains.com/wp-migrate-db-pro/upgrade/?utm_campaign=WP%2BMigrate%2BDB%2BPro%2BUpgrade&utm_source=wordpress.org&utm_medium=free%2Bplugin%2Blisting).
+Find out about the [incredible value that WP Migrate DB Pro brings on our website](https://deliciousbrains.com/wp-migrate-db-pro/upgrade/?utm_campaign=WP%2BMigrate%2BDB%2BPro%2BUpgrade&utm_source=wordpress.org&utm_medium=free%2Bplugin%2Blisting), or watch the video below.
+
+https://deliciousbrains.wistia.com/medias/5co63n4jqq
 
 == Frequently Asked Questions  ==
 
@@ -181,6 +185,13 @@ Find out all relevant [pricing information over on our official site](https://de
 3. Saving the exported database
 
 == Changelog ==
+
+= WP Migrate DB 2.0.1 - 2021-05-06 =
+* Bug fix: Replacing a string with nothing not supported
+* Bug fix: Plugin not working on sites with a custom REST API URL
+* Bug fix: Plugin not working on sites with a custom plugin directory
+* Bug fix: 'gmdateI18n' function not available on older versions of WordPress
+* Bug fix: Javascript file with tilde in filename blocked by some firewalls
 
 = WP Migrate DB 2.0 - 2021-04-28 =
 * New: Brand new user interface powered by React. [Read the release post](https://deliciousbrains.com/wp-migrate-db-pro-2-0-released/?utm_campaign=changelogs&utm_source=wordpress.org&utm_medium=free%2Bplugin%2Blisting&utm_content=MDB20)

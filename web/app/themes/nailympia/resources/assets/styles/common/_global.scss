@@ -200,6 +200,12 @@ h4 {
 .main {
   position: relative;
 
+  &.nomination {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   &.processing {
     &::before {
       position: absolute;
@@ -213,6 +219,33 @@ h4 {
   }
 
   margin-bottom: 4rem;
+}
+
+.accordeon {
+  .open-collapse {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    &.collapsed {
+      .icon-minus {
+        display: none;
+      }
+
+      .icon-plus {
+        display: block;
+      }
+    }
+
+    .icon-minus {
+      display: block;
+    }
+
+    .icon-plus {
+      display: none;
+    }
+  }
 }
 
 .page-header {

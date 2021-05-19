@@ -45,7 +45,7 @@
 
   </div>
 </header>
-<?php if(is_front_page()): ?>
+<?php if(is_front_page() || is_page(icl_object_id(644, 'page'))): ?>
 <section class="header-banner">
   <div class="container">
     <div class="row">
