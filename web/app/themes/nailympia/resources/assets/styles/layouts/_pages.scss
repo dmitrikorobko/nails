@@ -8,6 +8,18 @@ section {
       text-transform: uppercase;
     }
   }
+
+  &.judges {
+    .row {
+      margin-top: 4rem;
+    }
+
+    .avatar {
+      width: 100%;
+      height: auto;
+      margin-bottom: 2rem;
+    }
+  }
 }
 
 .row {
