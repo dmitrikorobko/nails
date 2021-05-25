@@ -217,7 +217,8 @@
                             </div>
                         <?php endwhile; ?>
                     <p class="mt-3">
-                        <a href="#" class="more">Подробнее о пакетах</a>
+
+                        <a href="<?php echo e(get_permalink(apply_filters( 'wpml_object_id', 703, 'post' ))); ?>" class="more" target="_blank"><?php echo e(__('More information about packages','sage')); ?></a>
                     </p>
                     
                 </div>
