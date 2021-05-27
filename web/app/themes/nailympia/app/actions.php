@@ -297,7 +297,7 @@ class Ajax extends Controller
         $client = '';
         $client_address = 'Address: ' . $address . ', City: ' . $city . ', Country: ' . $country . ', Postcode: ' . $postcode;
         $other_info = '';
-        $tax = true;
+        $tax = false;
 
         if($type == 'private') {
             $user_info = get_userdata($user_id);

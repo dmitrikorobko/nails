@@ -160,7 +160,7 @@ export default {
         let minimumNominations = 1; 
         let minimumOfflineNominations = 0;
         let result = false;
-          if(devision === 'cat-3'){
+          if(devision === 'cat-3' && document.querySelector("#offlineNominations").querySelectorAll("[type=checkbox]:checked").length > 0){
             minimumOfflineNominations = 3;
             result = checkNominations(document.querySelector('#offlineNominations'), minimumOfflineNominations);
             nominationError(result, ".error-message-cat-3", ".error-message-cat-1-2");

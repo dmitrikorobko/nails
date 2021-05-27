@@ -23,6 +23,13 @@ section {
 
   &.timetable {
     .nav-tabs {
+      .nav-item {
+        width: 100%;
+        text-align: center;
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+
       .nav-link {
         &:hover {
           border-color: #e9ecef #e9ecef $white;
@@ -37,7 +44,7 @@ section {
 
       li {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         border-bottom: solid 1px $grey;
         padding-top: 1rem;
         padding-bottom: 1rem;
@@ -209,6 +216,25 @@ section {
 }
 
 @include media-breakpoint-up(md) {
+  section {
+    &.timetable {
+      .nav-tabs {
+        .nav-item {
+          width: inherit;
+          text-align: left;
+          padding-top: 1rem;
+          padding-bottom: 1rem;
+        }
+      }
+
+      ul {
+        li {
+          flex-direction: row;
+        }
+      }
+    }
+  }
+
   .row {
     &.sponsor-package {
       .collapse,
