@@ -172,8 +172,8 @@
             </div>
             @if($form==='participant')
             <div class="col-12 col-lg-4 form-group">
-                <label for="profileImage" class="required">{{ __('Profile photo of the participant','sage') }}</label>
-                <input type="file" class="form-control-file" id="profileImage" name="profileImage" required>
+                <label for="profileImage">{{ __('Profile photo of the participant','sage') }}</label>
+                <input type="file" class="form-control-file" id="profileImage" name="profileImage">
                 <small id="profileImageHelp" class="form-text text-muted">{{ __('Minimum size - 400X500 px, Maximum filesize - 5mb','sage') }}</small>
                 <div class="invalid-feedback">
                     {{ __('Please add file!','sage') }}
@@ -186,8 +186,8 @@
                 <textarea class="form-control" id="regalia" name="regalia" rows="5" required></textarea>
             </div>
             <div class="col-12 col-lg-4 form-group">
-                <label for="profileImage" class="required">{{ __('Profile photo','sage') }}</label>
-                <input type="file" class="form-control-file" id="profileImage" name="profileImage" required>
+                <label for="profileImage">{{ __('Profile photo','sage') }}</label>
+                <input type="file" class="form-control-file" id="profileImage" name="profileImage">
                 <small id="profileImageHelp" class="form-text text-muted">{{ __('Minimum size - 400X500 px, Maximum filesize - 5mb','sage') }}</small>
                 <div class="invalid-feedback">
                     {{ __('Please add file!','sage') }}
