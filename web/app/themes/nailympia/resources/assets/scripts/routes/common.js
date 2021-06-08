@@ -464,9 +464,42 @@ export default {
       
     }
 
+    const profileProcess = () => {
+      $('.file-input').on('change',function(){
+        let curElement = $(this).parent().parent().find('.image');
+        let curDel = $(this).parent().parent().find('.custom-file-preview-del');
+
+        let reader = new FileReader();
+
+        if (this.files[0].size > 5000000) {
+            reader.abort()
+            alert('Big size!')
+            return false;
+        }
+
+        if ( this.files[0].type !== 'image/jpeg' && this.files[0].type !== 'image/png' && this.files[0].type !== 'image/gif') {
+          reader.abort()
+          alert('Invalid image type!')
+          return false;
+        }
+
+        reader.onload = function (e) {
+          curElement.attr('src', e.target.result).removeClass('hidden');
+          curDel.removeClass('hidden');
+        };
+
+        reader.readAsDataURL(this.files[0]);
+
+      });
+    }
+
     if(document.querySelector(".registration-form")){
       selectCountries();
       formProcess();
+    }
+
+    if(document.querySelector(".profile-info")){
+      profileProcess();
     }
 
   },
