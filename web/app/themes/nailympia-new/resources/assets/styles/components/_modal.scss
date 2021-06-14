@@ -1,0 +1,68 @@
+
+.modal {
+  &.modal-fullscreen {
+    padding: 0 !important; // override inline padding-right added from js
+
+    .modal-dialog {
+      width: 100%;
+      max-width: none;
+      height: 100%;
+      margin: 0;
+    }
+
+    .modal-content {
+      height: 100%;
+      border: 0;
+      border-radius: 0;
+
+      h2 {
+        margin-bottom: 2.5rem;
+      }
+    }
+
+    .modal-body {
+      overflow-y: auto;
+    }
+  }
+
+  &.registration {
+    .hide {
+      display: none;
+    }
+  }
+
+  .modal-body {
+    padding: 0;
+
+    .header {
+      height: 60px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-end;
+      width: 100%;
+      padding-right: 15px;
+      padding-left: 15px;
+    }
+  }
+}
+
+@include media-breakpoint-up(md) {
+  .modal {
+    &.modal-fullscreen {
+      .modal-dialog {
+        width: 100%;
+        max-width: 600px;
+        height: auto;
+        margin: 1.75rem auto;
+      }
+
+      .modal-content {
+        .reg-message {
+          padding-left: 3rem;
+          padding-right: 3rem;
+        }
+      }
+    }
+  }
+}

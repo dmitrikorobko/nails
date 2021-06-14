@@ -7,16 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-05 13:34+0300\n"
-"PO-Revision-Date: 2021-05-05 13:54+0300\n"
+"POT-Creation-Date: 2021-06-14 23:19+0300\n"
+"PO-Revision-Date: 2021-06-14 23:33+0300\n"
+"Last-Translator: \n"
 "Language-Team: \n"
+"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.4.3\n"
-"Last-Translator: \n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
-"Language: ru\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
 
 #: resources/functions.php:17
 msgid "Sage &rsaquo; Error"
@@ -56,7 +57,7 @@ msgid "Thank you!"
 msgstr "Спасибо!"
 
 #: resources/functions.php:191
-#: resources/ultimate-member/templates/account.php:186
+#: resources/ultimate-member/templates/account.php:259
 msgid "Team"
 msgstr "Команда"
 
@@ -65,54 +66,118 @@ msgid "Total"
 msgstr "Итог"
 
 #: resources/functions.php:299
-#: resources/views/partials/form-userdata.blade.php:70
+#: resources/views/partials/form-userdata.blade.php:90
 msgid "Phone"
 msgstr "Телефон"
 
-#: resources/ultimate-member/templates/account.php:181
+#: resources/functions.php:303
+#: resources/ultimate-member/templates/account.php:278
+#: resources/views/template-all-devisions.blade.php:30
+msgid "Description"
+msgstr "Описание"
+
+#: resources/ultimate-member/templates/account.php:253
 #: resources/views/partials/form-userdata.blade.php:4
 msgid "Information"
 msgstr "Информация"
 
-#: resources/ultimate-member/templates/account.php:183
-#: resources/views/partials/form-userdata.blade.php:51
-#: resources/views/partials/form-userdata.blade.php:131
+#: resources/ultimate-member/templates/account.php:256
+#: resources/views/partials/form-userdata.blade.php:71
+#: resources/views/partials/form-userdata.blade.php:151
 msgid "Country"
 msgstr "Страна"
 
-#: resources/ultimate-member/templates/account.php:194
-msgid "Choosed nominations"
-msgstr "Выбранные номинации"
+#: resources/ultimate-member/templates/account.php:262
+#: resources/ultimate-member/templates/account.php:271
+#: resources/views/partials/form-userdata.blade.php:122
+msgid "Invoice"
+msgstr "Счет"
+
+#: resources/ultimate-member/templates/account.php:268
+msgid "Package"
+msgstr "Пакет"
+
+#: resources/ultimate-member/templates/account.php:269
+msgid "Package Price"
+msgstr "Стоимость пакета"
 
 #: resources/sliced/sliced-invoice-display.php:125
 msgid "Page "
-msgstr "Страница"
+msgstr "Страница "
+
+#: resources/judge.php:10
+msgid "Participant"
+msgstr "Участник"
+
+#: resources/judge.php:11
+msgid "Nomination"
+msgstr "Номинация"
+
+#: resources/judge.php:12
+msgid "Criteria"
+msgstr "Критерий"
+
+#: resources/judge.php:13
+msgid "Works"
+msgstr "Работы"
+
+#: resources/judge.php:14
+msgid "Score"
+msgstr "Бал"
+
+#: resources/judge.php:108
+msgid "Select"
+msgstr "Выбрать"
+
+#: resources/judge.php:121
+msgid "Set score"
+msgstr "Назначить бал"
 
 #: resources/views/partials/header.blade.php:39
 msgid "Logout"
 msgstr "Выйти"
 
-#: resources/views/partials/form-userdata.blade.php:132
+#: resources/views/partials/form-userdata.blade.php:152
 msgid "Estonia"
 msgstr "Эстония"
+
+#: resources/nominations-form.php:13
+msgid "Choosed nominations"
+msgstr "Выбранные номинации"
+
+#: resources/nominations-form.php:59
+msgid "Add image file"
+msgstr "Добавить изображение"
+
+#: resources/nominations-form.php:139
+msgid "Add video file"
+msgstr "Добавить видео файл"
+
+#: resources/nominations-form.php:146
+msgid "Online contest link: "
+msgstr "Ссылка на онлайн-конкурс - "
+
+#: resources/nominations-form.php:149
+msgid "Not available"
+msgstr ""
 
 #: app/filters.php:34
 msgid "Continued"
 msgstr "Продолжает"
 
-#: app/setup.php:71
+#: app/setup.php:92
 msgid "Primary Navigation"
 msgstr ""
 
-#: app/setup.php:72
+#: app/setup.php:93
 msgid "Footer Menu"
 msgstr ""
 
-#: app/setup.php:111
+#: app/setup.php:136
 msgid "Primary"
 msgstr ""
 
-#: app/setup.php:115
+#: app/setup.php:140
 msgid "Footer"
 msgstr ""
 
@@ -131,11 +196,84 @@ msgstr ""
 
 #: resources/views/index.blade.php:8 resources/views/search.blade.php:8
 msgid "Sorry, no results were found."
-msgstr ""
+msgstr "Извините, результатов не найдено."
 
 #: resources/views/404.blade.php:8
 msgid "Sorry, but the page you were trying to view does not exist."
 msgstr ""
+"Извините, но страница, которую вы пытались просмотреть, не существует."
+
+#: resources/views/template-sponsor-packages.blade.php:23
+msgid "All Sponsor packages"
+msgstr "Все спонсорские пакеты"
+
+#: resources/views/template-sponsor-packages.blade.php:44
+msgid "Package price: "
+msgstr "Цена пакета "
+
+#: resources/views/template-all-nominations.blade.php:21
+#: resources/views/template-all-devisions.blade.php:38
+#: resources/views/template-participant-registration.blade.php:135
+msgid "Intramural/Online competition"
+msgstr "Очное / онлайн-соревнование"
+
+#: resources/views/template-all-nominations.blade.php:54
+#: resources/views/template-all-devisions.blade.php:72
+#: resources/views/template-participant-registration.blade.php:158
+msgid "Online competition"
+msgstr "Онлайн-соревнование"
+
+#: resources/views/template-all-nominations.blade.php:75
+#: resources/views/template-participant-registration.blade.php:178
+msgid "No online nominations"
+msgstr "Нет онлайн-номинаций"
+
+#: resources/views/template-all-devisions.blade.php:45
+msgid "ART Master only (minimum 3 nominations)"
+msgstr "Только ART Master (минимум 3 номинации)"
+
+#: resources/views/template-all-devisions.blade.php:48
+msgid "Master Tech (at least 3 nominations)"
+msgstr "Master Tech (минимум 3 номинации)"
+
+#: resources/views/template-all-devisions.blade.php:51
+#: resources/views/template-all-devisions.blade.php:63
+msgid "nominations and more"
+msgstr "номинации и более"
+
+#: resources/views/template-all-devisions.blade.php:57
+#: resources/views/template-all-devisions.blade.php:60
+#: resources/views/template-all-devisions.blade.php:78
+#: resources/views/template-all-devisions.blade.php:81
+#: resources/views/template-all-devisions.blade.php:84
+#: resources/views/template-all-devisions.blade.php:87
+msgid "nomination"
+msgstr "номинация"
+
+#: resources/views/template-all-devisions.blade.php:81
+msgid "photo"
+msgstr "фото"
+
+#: resources/views/template-all-devisions.blade.php:87
+msgid "video"
+msgstr "видео"
+
+#: resources/views/template-all-devisions.blade.php:96
+msgid "Additional"
+msgstr "Дополнительный"
+
+#: resources/views/template-judge-registration.blade.php:24
+#: resources/views/template-sponsor-registration.blade.php:24
+#: resources/views/template-participant-registration.blade.php:205
+#: resources/views/template-participant-registration.blade.php:221
+msgid "Step"
+msgstr "Шаг"
+
+#: resources/views/template-judge-registration.blade.php:25
+#: resources/views/template-sponsor-registration.blade.php:25
+#: resources/views/template-participant-registration.blade.php:222
+msgid "Finish"
+msgstr "Завершить"
 
 #: resources/views/partials/header.blade.php:36
 #: resources/views/partials/form-modal.blade.php:24
@@ -179,118 +317,127 @@ msgstr "Имя и фамилия конкурсанта"
 msgid "Team name, if any"
 msgstr "Команда, если есть"
 
-#: resources/views/partials/form-userdata.blade.php:44
+#: resources/views/partials/form-userdata.blade.php:43
+msgid "Name and surname"
+msgstr "Имя и фамилия конкурсанта"
+
 #: resources/views/partials/form-userdata.blade.php:47
-msgid "Address"
-msgstr "Адрес"
-
-#: resources/views/partials/form-userdata.blade.php:57
-msgid "City"
-msgstr "Город"
-
-#: resources/views/partials/form-userdata.blade.php:61
-msgid "Postcode"
-msgstr "Почтовый индекс"
-
-#: resources/views/partials/form-userdata.blade.php:67
-msgid "Contacts"
-msgstr "Контакты"
-
-#: resources/views/partials/form-userdata.blade.php:74
-msgid "Email"
-msgstr "Е-почта"
-
-#: resources/views/partials/form-userdata.blade.php:80
-msgid "Password"
-msgstr "Пароль"
-
-#: resources/views/partials/form-userdata.blade.php:84
-msgid "Repeat Password"
-msgstr "Повторите пароль"
-
-#: resources/views/partials/form-userdata.blade.php:87
-msgid "Passwords missmatch"
-msgstr "Пароли не совпадают"
-
-#: resources/views/partials/form-userdata.blade.php:94
-msgid "Country you will represent"
-msgstr "Страна, которую вы будете представлять"
-
-#: resources/views/partials/form-userdata.blade.php:102
-msgid "Invoice"
-msgstr "Счет"
-
-#: resources/views/partials/form-userdata.blade.php:105
-msgid "Invoice for"
-msgstr "Счет на"
-
-#: resources/views/partials/form-userdata.blade.php:108
-msgid "Private person"
-msgstr "Частное лицо"
-
-#: resources/views/partials/form-userdata.blade.php:110
-msgid "Estonian legal entity"
-msgstr "Эстонское юридическое лицо"
-
-#: resources/views/partials/form-userdata.blade.php:111
-msgid "EU legal entity (VAT needed)"
-msgstr "Юридическое лицо из ЕС (необходим VAT)"
-
-#: resources/views/partials/form-userdata.blade.php:112
-msgid "Legal entity outside EU"
-msgstr "Юридическое лицо за пределами ЕС"
-
-#: resources/views/partials/form-userdata.blade.php:117
+#: resources/views/partials/form-userdata.blade.php:53
+#: resources/views/partials/form-userdata.blade.php:137
 msgid "Company name"
 msgstr "Имя компании"
 
-#: resources/views/partials/form-userdata.blade.php:123
+#: resources/views/partials/form-userdata.blade.php:57
+#: resources/views/partials/form-userdata.blade.php:143
 msgid "Registration number"
 msgstr "Регистрационный номер"
 
-#: resources/views/partials/form-userdata.blade.php:127
-#: resources/views/partials/form-userdata.blade.php:143
+#: resources/views/partials/form-userdata.blade.php:64
+#: resources/views/partials/form-userdata.blade.php:67
+msgid "Address"
+msgstr "Адрес"
+
+#: resources/views/partials/form-userdata.blade.php:77
+msgid "City"
+msgstr "Город"
+
+#: resources/views/partials/form-userdata.blade.php:81
+msgid "Postcode"
+msgstr "Почтовый индекс"
+
+#: resources/views/partials/form-userdata.blade.php:87
+msgid "Contacts"
+msgstr "Контакты"
+
+#: resources/views/partials/form-userdata.blade.php:94
+msgid "Email"
+msgstr "Е-почта"
+
+#: resources/views/partials/form-userdata.blade.php:100
+msgid "Password"
+msgstr "Пароль"
+
+#: resources/views/partials/form-userdata.blade.php:104
+msgid "Repeat Password"
+msgstr "Повторите пароль"
+
+#: resources/views/partials/form-userdata.blade.php:107
+msgid "Passwords missmatch or length less than 6 characters"
+msgstr "Пароли не совпадают или длина менее 6 символов"
+
+#: resources/views/partials/form-userdata.blade.php:114
+msgid "Country you will represent"
+msgstr "Страна, которую вы будете представлять"
+
+#: resources/views/partials/form-userdata.blade.php:125
+msgid "Invoice for"
+msgstr "Счет на"
+
+#: resources/views/partials/form-userdata.blade.php:128
+msgid "Private person"
+msgstr "Частное лицо"
+
+#: resources/views/partials/form-userdata.blade.php:130
+msgid "Estonian legal entity"
+msgstr "Эстонское юридическое лицо"
+
+#: resources/views/partials/form-userdata.blade.php:131
+msgid "EU legal entity (VAT needed)"
+msgstr "Юридическое лицо из ЕС (необходим VAT)"
+
+#: resources/views/partials/form-userdata.blade.php:132
+msgid "Legal entity outside EU"
+msgstr "Юридическое лицо за пределами ЕС"
+
+#: resources/views/partials/form-userdata.blade.php:147
+#: resources/views/partials/form-userdata.blade.php:163
 msgid "VAT number"
 msgstr "VAT номер"
 
-#: resources/views/partials/form-userdata.blade.php:137
+#: resources/views/partials/form-userdata.blade.php:157
 msgid "Invoice Full Address and additional info"
 msgstr "Полный адрес для счета и дополнительная информация"
 
-#: resources/views/partials/form-userdata.blade.php:151
+#: resources/views/partials/form-userdata.blade.php:171
 msgid "Other"
 msgstr "Другое"
 
-#: resources/views/partials/form-userdata.blade.php:155
+#: resources/views/partials/form-userdata.blade.php:175
 msgid "Profile photo of the participant"
 msgstr "Фото профиля участника"
 
-#: resources/views/partials/form-userdata.blade.php:157
-#: resources/views/partials/form-userdata.blade.php:171
+#: resources/views/partials/form-userdata.blade.php:177
+#: resources/views/partials/form-userdata.blade.php:191
 msgid "Minimum size - 400X500 px, Maximum filesize - 5mb"
-msgstr "Минимальный размер - 400 X 500px, Размер файла не более 5 МБ."
+msgstr "Минимальный размер - 400 X 500px, Размер файла не более 5 МБ"
 
-#: resources/views/partials/form-userdata.blade.php:159
+#: resources/views/partials/form-userdata.blade.php:179
+#: resources/views/partials/form-userdata.blade.php:193
+#: resources/views/partials/form-userdata.blade.php:230
 msgid "Please add file!"
 msgstr "Пожалуйста, добавьте файл!"
 
-#: resources/views/partials/form-userdata.blade.php:165
+#: resources/views/partials/form-userdata.blade.php:185
 msgid "Regalia"
 msgstr "Регалии"
 
-#: resources/views/partials/form-userdata.blade.php:169
+#: resources/views/partials/form-userdata.blade.php:189
 msgid "Profile photo"
 msgstr "Фото для профайла"
 
-#: resources/views/partials/form-userdata.blade.php:184
+#: resources/views/partials/form-userdata.blade.php:207
 msgid "Choose a package for cooperation"
 msgstr "Выберите пакет для сотрудничества"
 
-#: resources/views/partials/form-userdata.blade.php:198
+#: resources/views/partials/form-userdata.blade.php:218
+msgid "More information about packages"
+msgstr "Больше информации о пакетах"
+
+#: resources/views/partials/form-userdata.blade.php:226
 msgid "Company logo"
 msgstr "Лого компании"
 
-#: resources/views/partials/form-userdata.blade.php:200
+#: resources/views/partials/form-userdata.blade.php:228
 msgid "Maximum filesize - 5mb"
 msgstr "Максимальный размер файла - 5 МБ"
 
@@ -318,63 +465,45 @@ msgstr "Пожалуйста, заполните это поле"
 msgid "No categories"
 msgstr "Нет категорий"
 
-#: resources/views/template-participant-registration.blade.php:126
+#: resources/views/template-participant-registration.blade.php:128
 msgid "Nominations"
 msgstr "Номинации"
 
-#: resources/views/template-participant-registration.blade.php:127
+#: resources/views/template-participant-registration.blade.php:129
 msgid "Select the nominations in which you want to participate"
 msgstr "Выберите номинации, в которых вы хотите участвовать"
 
-#: resources/views/template-participant-registration.blade.php:133
-msgid "Intramural/Online competition"
-msgstr "Очное / онлайн-соревнование"
-
-#: resources/views/template-participant-registration.blade.php:134
+#: resources/views/template-participant-registration.blade.php:136
 msgid "Competitions are held in pavilions or online"
-msgstr "Соревнования проходят в павильонах или онлайн."
+msgstr "Соревнования проходят в павильонах или онлайн"
 
-#: resources/views/template-participant-registration.blade.php:149
+#: resources/views/template-participant-registration.blade.php:151
 msgid "No offline nominations"
 msgstr "Нет офлайн-номинаций"
 
-#: resources/views/template-participant-registration.blade.php:156
-msgid "Online competition"
-msgstr "Онлайн-соревнование"
-
-#: resources/views/template-participant-registration.blade.php:157
+#: resources/views/template-participant-registration.blade.php:159
 msgid "Competitions are held online"
 msgstr "Соревнования проводятся онлайн"
 
-#: resources/views/template-participant-registration.blade.php:176
-msgid "No online nominations"
-msgstr "Нет онлайн-номинаций"
-
-#: resources/views/template-participant-registration.blade.php:182
+#: resources/views/template-participant-registration.blade.php:184
 msgid "Please choose at least one nomination!"
 msgstr "Выберите хотя бы одну номинацию!"
 
-#: resources/views/template-participant-registration.blade.php:185
+#: resources/views/template-participant-registration.blade.php:187
 msgid "Please choose at least three live nominations!"
 msgstr "Пожалуйста, выберите не менее трех лайв номинаций!"
 
-#: resources/views/template-participant-registration.blade.php:192
+#: resources/views/template-participant-registration.blade.php:201
 msgid "Registration cost will be:"
 msgstr "Стоимость регистрации:"
 
-#: resources/views/template-participant-registration.blade.php:196
-#: resources/views/template-participant-registration.blade.php:212
-msgid "Step"
-msgstr "Шаг"
-
-#: resources/views/template-participant-registration.blade.php:197
+#: resources/views/template-participant-registration.blade.php:206
 msgid "Next"
 msgstr "Далее"
 
-#: resources/views/template-participant-registration.blade.php:209
+#: resources/views/template-participant-registration.blade.php:218
 msgid "Back"
 msgstr "Назад"
 
-#: resources/views/template-participant-registration.blade.php:213
-msgid "Finish"
-msgstr "Завершить"
+#~ msgid "Passwords missmatch"
+#~ msgstr "Пароли не совпадают"

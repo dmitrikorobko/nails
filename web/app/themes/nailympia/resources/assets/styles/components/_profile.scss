@@ -47,6 +47,10 @@
 .profile-info {
   color: $black;
 
+  form {
+    position: relative;
+  }
+
   .row {
     width: 100%;
   }
@@ -61,6 +65,16 @@
     list-style: none;
     padding: 0;
     margin: 0;
+  }
+
+  .btn {
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    border-radius: 0;
+    background: $green;
+    color: $white;
+    padding: 11px 16px;
   }
 
   .main-info {
@@ -109,6 +123,13 @@
             margin-bottom: 4rem;
             text-transform: uppercase;
           }
+        }
+
+        .online-contest-url {
+          width: 100%;
+          margin-top: 2rem;
+          font-size: 1.2rem;
+          font-weight: 700;
         }
 
         .contestImage,
@@ -192,11 +213,11 @@
 
       .custom-file-preview-del {
         position: absolute;
-        top: 0;
-        right: 0;
-        width: 30px;
-        height: 30px;
-        padding: 7px;
+        top: 10px;
+        right: 10px;
+        width: 20px;
+        height: 20px;
+        padding: 5px;
         z-index: 5;
         background: $white;
         text-align: center;
@@ -210,6 +231,10 @@
           stroke-width: 3px;
           width: 15px;
           height: 15px;
+          position: absolute;
+          top: 50%;
+          right: 50%;
+          transform: translate3d(50%, -50%, 0);
         }
       }
     }
