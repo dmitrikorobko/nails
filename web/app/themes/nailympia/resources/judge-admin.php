@@ -11,7 +11,7 @@
                 <div class="form-group">
                     <label for="participant">
                         <strong>Participant</strong>
-                        <?php wp_dropdown_users( ['class'=>'form-control', 'role'=>'participant', 'name' => 'participant', 'show_option_none'   => 'Select',] ); ?>
+                        <?php wp_dropdown_users( ['class'=>'form-control', 'role'=>'participant', 'name' => 'participant', 'show_option_none'   => 'Select', 'show' => 'ID'] ); ?>
                     </label>
                 </div>
             </div>
@@ -41,7 +41,7 @@
 
 
 
-        <button id="submit" name="form" type="submit" class="btn btn-primary">Submit</button>
+        <button id="submit" name="form" type="submit" class="btn">Submit</button>
 
 
         <input type="hidden" name="action" value="judge_admin_form">

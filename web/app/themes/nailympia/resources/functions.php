@@ -243,6 +243,7 @@ function create_invoice($user_id, $tax, $total) {
 
             $line_items = [];
             
+            $nominations = [];
             
             if($user_role == 'participant'){
 
@@ -259,8 +260,8 @@ function create_invoice($user_id, $tax, $total) {
                             'amount' => '',
                             'taxable' => $tax,
                         );
-
-                        array_push($line_items, $temp_array);
+                        $nominations[] = $nomination_title;
+                        //array_push($line_items, $temp_array);
                 
                     endwhile;
                 
@@ -271,11 +272,14 @@ function create_invoice($user_id, $tax, $total) {
 
             }
 
+            $invoice_description = implode("\n",$nominations);
+
             $total_array = array(
                 'qty' => '1',
                 'title' => __('Total','sage'),
                 'amount' => $total,
                 'taxable' => $tax,
+                'description' => $invoice_description
             );
             array_push($line_items, $total_array);
 

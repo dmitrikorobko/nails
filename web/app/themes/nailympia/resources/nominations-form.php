@@ -19,46 +19,67 @@
                     $nomination_id = get_sub_field('field_6081664d82734');
                     $video_active = get_sub_field('field_608168e9562ae');
                     $video = get_sub_field('field_608168fd562af');
+                    $type = get_field('type', $nomination_id);
+                    $count = $type == 'online' ? 1 : 5;
 
 
                     $image_active = get_sub_field('field_60816812e7ea5');
 
-                    $image = get_sub_field('gallery') ? get_sub_field('gallery')[0] : '' ;
+                    $image = get_sub_field('gallery') ? get_sub_field('gallery')  : '' ;
 
                     $online_url_active =  get_sub_field('field_60816945c3988');
                     $online_url = get_sub_field('field_6081697fc3989');
+
+                    $text_field_active = get_sub_field('field_60c90d21eae05');
+                    $text_field = get_sub_field('field_60c90d37eae06') ? get_sub_field('field_60c90d37eae06')  : '' ;
+
                     $activate_upload = sliced_get_invoice_status($user_invoice->ID) == "paid" ? true : false;
 
                     ?>
-                    <li data-loop="<?= $loop ?>">
+                    <li data-loop="<?= $loop ?>" data-max="<?= $type == 'online' ? 1 : 5     ?>">
 
                         <div class="name">
                             <?if($activate_upload){?><h4><?}?>№<?echo get_field('number', $nomination_id);?> <?php echo get_the_title($nomination_id); ?><?if($activate_upload){?></h4><?}?>
                         </div>
 
+
                         <?if($image_active && $activate_upload){ ?>
-                            <div class="contest contestImage">
+
+                            <?php
+                            $i = 0;
+                            foreach (range(0, $count - 1) as $img) { ?>
+
+                                <div class="contest contestImage">
 
 
-                                <input type="hidden" class="dz-image<?= $loop ?>" name="data[<?= $nomination_id ?>][image]" value="<?= $image ? $image['ID'] : '' ?>">
+                                <input type="hidden" class="dz-image<?= $loop ?><?= $i ?>" name="data[<?= $nomination_id ?>][image][<?= $i ?>]" value="<?= $image[$i] ? $image[$i]['ID'] : '' ?>">
 
 
                                 <div class="media-item">
-											<span class="custom-file-preview-del <?= $image ? '' : 'hidden' ?>">
-												<svg class="icon"><use xlink:href="#ic-close"></use></svg>
-											</span>
+                                    <span class="custom-file-preview-del <?= $image[$i] ? '' : 'hidden' ?>">
+                                        <svg class="icon"><use xlink:href="#ic-close"></use></svg>
+                                    </span>
 
-                                    <img data-src="<?= $image ? $image['url'] : '' ?>" class="<?= $image ? 'fancybox' : ''  ?> image_uploaded-image image_uploaded-image<?= $loop ?> image <?= $image ? '' : 'hidden' ?>" src="<?= $image ? $image['sizes']['medium'] : '' ?>" alt="">
+                                    <img data-src="<?= $image[$i] ? $image[$i]['url'] : '' ?>" class="<?= $image[$i] ? 'fancybox' : ''  ?> image_uploaded-image image_uploaded-image<?= $loop ?><?= $i ?> image <?= $image[$i] ? '' : 'hidden' ?>" src="<?= $image[$i] ? $image[$i]['sizes']['medium'] : '' ?>" alt="">
 
                                     <button class="file-upload">
-                                        <div  data-type="image"  class="dropzones file-input"  ></div>
+                                        <div data-i="<?= $i ?>" data-type="image"  class="dropzones file-input"  ></div>
                                     </button>
                                     <svg class="icon add-img"> <use xlink:href="#ic-photo"></use></svg>
                                     <svg class="icon-plus add-img"> <use xlink:href="#ic-plus"></use></svg>
                                 </div>
                                 <h4><? echo __('Add image file','sage') ?></h4>
                             </div>
+
+                            <?php
+
+                                $i++;
+
+                            } ?>
+
                         <?}?>
+
+
                         <?if($video_active && $activate_upload){
 
                               
@@ -140,13 +161,24 @@
 
                             </div>
                         <?}?>
-                        
                         <?if($online_url_active && $activate_upload){ ?>
                         <div class="online-contest-url">
                             <? echo __('Online contest link: ','sage') ?><?php if(isset($online_url)) {?>
                                  <a href="<?php echo $online_url; ?>" target="_blank"><?php echo $online_url; ?></a>
                                  
                             <?php } else { echo __('Not available','sage'); }?>
+                        </div>
+                        <?}?>
+
+                        <?if($text_field_active && $activate_upload){ ?>
+                        <div class="work-desc">
+                            
+                     
+                                <label for="data[<?= $nomination_id ?>][description]"><?php echo __('Enter work description','sage');?></label>
+                                <textarea id="work-description-<?= $loop ?>" name="data[<?= $nomination_id ?>][description]" rows="5" required="">
+                                <?php echo $text_field ?>
+                                </textarea>
+                                <button id="submit" name="form" type="submit" class="btn"><?php echo __('Submit','sage');?></button>
                         </div>
                         <?}?>
                     </li>
@@ -159,12 +191,11 @@
 
         </div>
 
-        <div class="col-12">
-            <button id="submit" name="form" type="submit" class="btn btn-lg">Submit</button>
 
-            <input type="hidden" name="action" value="user_nominations_form">
-            <input type="hidden" name="user_id" value="<?= $user_id ?>">
-        </div>
+        <button id="submit" name="form" type="submit" class="btn hidden">Submit</button>
+
+        <input type="hidden" name="action" value="user_nominations_form">
+        <input type="hidden" name="user_id" value="<?= $user_id ?>">
     <?php endif; ?>
 
 

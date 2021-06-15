@@ -64,8 +64,12 @@ class Ajax extends Controller
         $nomination = $_POST['nomination'];
         $participant_user = get_userdata($participant);
 
+        $i = 0;
+
+
         if ($judges) {
             foreach ($judges as $judge) {
+
 
                 $judge_id = (int)$judge['judge'];
                 $judging_criteria = (int)$judge['criteria'];
@@ -73,14 +77,29 @@ class Ajax extends Controller
                 $judge_user = get_userdata($judge_id);
                 $judging_criteria_post = get_post($judging_criteria);
 
-                $post_id = wp_insert_post([
+                $id = "$user_id-$nomination-$judging_criteria";
+
+                $q = new \WP_Query([
                     'post_type' => 'score',
                     'post_status' => 'publish',
-                    'post_author' => $user_id,
-                    'post_title'    => $participant_user->display_name . ' - ' . $judge_user->display_name. ' - ' . $judging_criteria_post->post_title
-
+                    'meta_key' => 'id',
+                    'meta_value' => $id,
+                    'fields' => 'ids'
                 ]);
 
+
+
+                if ($q->found_posts > 0)
+                    $post_id = $q->posts[0] ;
+                else
+                    $post_id = wp_insert_post([
+                        'post_type' => 'score',
+                        'post_status' => 'publish',
+                        'post_author' => $user_id,
+                        'post_title'    => $participant_user->display_name . ' - ' . $judge_user->display_name. ' - ' . $judging_criteria_post->post_title
+
+                ]);
+                update_field('id', $id, $post_id);
                 update_field('participant', $participant, $post_id);
                 update_field('nomination', $nomination, $post_id);
                 update_field('judge', $judge_id, $post_id);
@@ -92,11 +111,29 @@ class Ajax extends Controller
                 $nominatios = get_field('nomination',  $judge_user) ?? [];
                 $nomination_user[] = $nominatios;
 
+
+
                 update_field('judging_criteria', $judging_criteria_user, $judge_user);
                 update_field('nomination', $nomination_user, $judge_user);
 
                // update_field('judge', $judge_id, $judging_criteria);
+
+                $data[$i]['nomination'] = $nomination;
+                $data[$i]['criteria'] = $judging_criteria;
+                $data[$i]['judge'] = $judge_id;
+                $i++;
             }
+
+
+
+            $judges = get_field('judges', $participant_user) ?? [];
+
+            $data = array_merge($judges, $data);
+
+            update_field('judges', $data, $participant_user);
+
+
+
         }
 
     }
@@ -144,7 +181,9 @@ class Ajax extends Controller
     public function select_nomination() {
 
         $nomination_id = $_GET['nomination_id'];
+        $user_id = $_GET['user_id'];
         $criteries = get_field('judging_criteria', $nomination_id);
+        $judges = get_field('judges',  'user_' . $user_id);
 
         $data = '<br><table class="table">';
 
@@ -158,10 +197,19 @@ class Ajax extends Controller
                 $loop++;
 
                // $selected = in_array($criteria_id, get_field('judging_criteria'));
+                $selected = '';
+                foreach ($judges as $judge) {
+                    if ($judge['nomination'] == $nomination_id)
+                        if ($judge['criteria'] == $criteria_id)
+                            $selected = $judge['judge'];
+                }
 
-                $data .= '<tr>';
+
+                $class = $selected ? 'table-success' : '';
+
+                $data .= '<tr class0="'.$class.'">';
                 $data .= '<td><input type="hidden" value="'.$criteria->ID.'" name="judge['.$loop.'][criteria]">'.$criteria->post_title.'</td>
-                          <td>'.wp_dropdown_users( ['echo' => false, 'class'=>'form-control','role'=>'judge', 'name' => 'judge['.$loop.'][judge]', 'show_option_none'   => 'Select',] ).'</td>';
+                          <td>'.wp_dropdown_users( ['selected' => $selected, 'echo' => false, 'class'=>'form-control','role'=>'judge', 'name' => 'judge['.$loop.'][judge]', 'show_option_none'   => 'Select',] ).'</td>';
                 $data .= '</tr>';
 
 
@@ -226,8 +274,12 @@ class Ajax extends Controller
                 //$keys[] = $nomination_id;
 
                 if ($nomination_id === (int)$key) {
-                    $nominations_updated[$i]['gallery'] = [ (int)$value['image']];
+
+
+
+                    $nominations_updated[$i]['gallery'] =   (array)$value['image'];
                     $nominations_updated[$i]['video'] = (int)$value['video'];
+                    $nominations_updated[$i]['field_60c90d37eae06'] = (string)$value['description'];
                 }
 
             }
@@ -237,7 +289,7 @@ class Ajax extends Controller
        update_field('nominations',$nominations_updated, 'user_' . $user_id);
 
 
-        wp_send_json($nominations_updated);
+        wp_send_json($data);
     }
 
 
@@ -490,12 +542,14 @@ class Ajax extends Controller
             $gallery_active = get_field( "field_608edebfd54c9", $nomination );
             $video_active = get_field( "field_608eded8d54ca", $nomination );
             $online_contest_url_active = get_field( "field_608edee0d54cb", $nomination );
+            $text_field_active = get_field( "field_60c90c23273b1", $nomination );
 
             $temp_array = array(
                 'field_6081664d82734' => $nomination_object,
                 'field_60816812e7ea5' => $gallery_active,
                 'field_608168e9562ae' => $video_active,
-                'field_60816945c3988' => $online_contest_url_active
+                'field_60816945c3988' => $online_contest_url_active,
+                'field_60c90d21eae05' => $text_field_active
             );
 
             array_push($nominations_array, $temp_array);

@@ -150,33 +150,6 @@ if ($is_participant || $is_sponsor){
             <ul>
 
 
-                <?php if (is_user_role('participant')) { ?>
-
-                    <li>
-                        <a class="" href="<?php the_permalink(865) ?>">
-
-                             <span class="um-account-icontip uimob800-show um-tip-w" original-title="Account">
-                                                <i class="um-faicon-user"></i>
-                                            </span>
-
-
-                            <span class="um-account-icon uimob800-hide">
-                                            <i class="um-faicon-user"></i>
-                                        </span>
-
-                            <span class="um-account-title uimob800-hide">Nominations</span>
-
-
-
-                            <span class="um-account-arrow uimob800-hide">
-                                            <i class="um-faicon-angle-right"></i>
-                                        </span>
-
-                            </a>
-                    </li>
-
-
-                <?php } ?>
 
 
                 <?php if (is_user_role('judge_admin')) { ?>
