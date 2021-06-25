@@ -91,6 +91,9 @@ Container::getInstance()
         ]);
     }, true);
 
+
+
+
 function shortcode_invoice_url( $atts ) {
 
     // Assign default values
@@ -400,3 +403,49 @@ function wpb_show_current_user_attachments( $query ) {
     }
     return $query;
 } 
+
+
+function users_set_columns( $columns ) {
+
+    unset( $columns['account_status'] );
+    unset( $columns['posts'] );
+    unset( $columns['name'] );
+    unset( $columns['email'] );
+    $columns['user_id'] = 'User ID';
+    $columns['nominations'] = 'Nominations';
+    return $columns;
+}
+
+add_filter( 'manage_users_columns', 'users_set_columns' );
+
+
+add_action('manage_users_custom_column',  'user_id_column', 10, 3);
+add_action('manage_users_custom_column',  'user_nominations_column', 10, 3);
+
+function user_id_column($value, $column_name, $user_id) {
+    $user = get_userdata( $user_id );
+	if ( 'user_id' == $column_name )
+		return $user_id;
+    return $value;
+}
+
+
+function user_nominations_column($value, $column_name, $user_id) {
+    //$user = get_userdata( $user_id );
+
+	if ( 'nominations' == $column_name ){
+        if( have_rows('field_608164444c690', 'user_'.$user_id.'') ):
+            $result = "";
+            while ( have_rows('field_608164444c690', 'user_'.$user_id.'')) : the_row();
+                $nomination_id = get_sub_field('field_6081664d82734');
+
+
+                $result .= get_field('number', $nomination_id). '. - ' . get_field('type', $nomination_id) . ' - ' . get_the_title($nomination_id) . '<br>';
+            endwhile;
+            return $result;
+        else :
+            // no rows found
+        endif;
+    }
+    return $value;
+}

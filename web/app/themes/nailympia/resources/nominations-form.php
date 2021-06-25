@@ -48,11 +48,11 @@
                             <?php
                             $i = 0;
                             foreach (range(0, $count - 1) as $img) { ?>
-
+                            
                                 <div class="contest contestImage">
 
 
-                                <input type="hidden" class="dz-image<?= $loop ?><?= $i ?>" name="data[<?= $nomination_id ?>][image][<?= $i ?>]" value="<?= $image[$i] ? $image[$i]['ID'] : '' ?>">
+                                <input type="hidden" class="dz-image<?= $loop ?><?= $i ?>" name="data[<?= $nomination_id ?>][image][<?= $i ?>]" value="<?= isset($image[$i]) && $image[$i] ? $image[$i]['ID'] : '' ?>">
 
 
                                 <div class="media-item">
@@ -60,7 +60,7 @@
                                         <svg class="icon"><use xlink:href="#ic-close"></use></svg>
                                     </span>
 
-                                    <img data-src="<?= $image[$i] ? $image[$i]['url'] : '' ?>" class="<?= $image[$i] ? 'fancybox' : ''  ?> image_uploaded-image image_uploaded-image<?= $loop ?><?= $i ?> image <?= $image[$i] ? '' : 'hidden' ?>" src="<?= $image[$i] ? $image[$i]['sizes']['medium'] : '' ?>" alt="">
+                                    <img data-src="<?= isset($image[$i]) && $image[$i] ? $image[$i]['url'] : '' ?>" class="<?= isset($image[$i]) && $image[$i] ? 'fancybox' : ''  ?> image_uploaded-image image_uploaded-image<?= $loop ?><?= $i ?> image <?= isset($image[$i]) && $image[$i]  ? '' : 'hidden' ?>" src="<?= isset($image[$i]) && $image[$i] ? $image[$i]['sizes']['medium'] : '' ?>" alt="">
 
                                     <button class="file-upload">
                                         <div data-i="<?= $i ?>" data-type="image"  class="dropzones file-input"  ></div>
@@ -87,11 +87,7 @@
                             ?>
                             <div class="contest contestVideo">
 
-                                <input type="hidden" value="><?= $video  ?  $video['ID'] : '' ?>" class="dz-video<?= $loop ?>" name="data[<?= $nomination_id ?>][video]">
-                                <div class="image_uploaded-video image_uploaded-video<?= $loop ?>" >
-
-
-                                </div>
+                                <input type="hidden" value="<?= $video  ?  $video['ID'] : '' ?>" class="dz-video<?= $loop ?>" name="data[<?= $nomination_id ?>][video]">
 
 
                                 <div class="media-item">
@@ -99,7 +95,7 @@
 												<svg class="icon"><use xlink:href="#ic-close"></use></svg>
 											</span>
 
-                                    <img data-src="<?= $video ? $video['url'] : ''    ; ?>" class="<?= $video ? 'fancybox' : '' ?> image_uploaded-video image_uploaded-video<?= $loop ?>  image <?= $video ? '' : 'hidden' ?>" src="<?= get_field('placeholder', 'option')['url'] ?>" alt="">
+                                    <img data-src="<?= $video ? $video['url'] : ''    ; ?>" class="<?= $video ? 'fancybox0' : '' ?> image_uploaded-video image_uploaded-video<?= $loop ?>  image <?= $video ? '' : 'hidden' ?>" src="<?= get_field('placeholder', 'option')['url'] ?>" alt="">
                                     <button class="file-upload">
                                         <div data-type="video" class="file-input video dropzones" ></div>
                                     </button>

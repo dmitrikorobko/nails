@@ -37,7 +37,7 @@ class Ajax extends Controller
     }
 
 
-    function set_score() {
+    public function set_score() {
         $post_id = (int)$_POST['post_id'];
         $score = (int)$_POST['score'];
 
@@ -52,16 +52,15 @@ class Ajax extends Controller
 
 
 
-    function judge_admin_form() {
+    public function judge_admin_form() {
 
-//        print_r($_POST);
-//
-//        die();
+
 
         $judges = $_POST['judge'];
         $user_id = (int)$_POST['user_id'];
         $participant = (int)$_POST['participant'];
         $nomination = $_POST['nomination'];
+        $nomination_post = get_post($nomination);
         $participant_user = get_userdata($participant);
 
         $i = 0;
@@ -88,17 +87,29 @@ class Ajax extends Controller
                 ]);
 
 
+                $post_title = $participant_user->display_name . ' - ' . $judge_user->display_name. ' - ' . $nomination_post->post_title .' - ' . $judging_criteria_post->post_title;
 
-                if ($q->found_posts > 0)
+
+                if ($q->found_posts > 0) {
                     $post_id = $q->posts[0] ;
+                    wp_update_post([
+                        'ID' => $post_id,
+                        'post_type' => 'score',
+                        'post_status' => 'publish',
+                        'post_author' => $user_id,
+                        'post_title'    => $post_title
+
+                    ]);
+                }
+
                 else
                     $post_id = wp_insert_post([
                         'post_type' => 'score',
                         'post_status' => 'publish',
                         'post_author' => $user_id,
-                        'post_title'    => $participant_user->display_name . ' - ' . $judge_user->display_name. ' - ' . $judging_criteria_post->post_title
+                        'post_title'    => $post_title
 
-                ]);
+                    ]);
                 update_field('id', $id, $post_id);
                 update_field('participant', $participant, $post_id);
                 update_field('nomination', $nomination, $post_id);
@@ -139,8 +150,7 @@ class Ajax extends Controller
     }
 
 
-
-    function  select_participant() {
+    public function  select_participant() {
         $user_id = (int)$_GET['user_id'];
 
 
@@ -275,16 +285,14 @@ class Ajax extends Controller
 
                 if ($nomination_id === (int)$key) {
 
-
-
-                    $nominations_updated[$i]['gallery'] =   (array)$value['image'];
-                    $nominations_updated[$i]['video'] = (int)$value['video'];
+                    $nominations_updated[$i]['gallery'] =  $value['image'] ? (array)$value['image'] : '';
+                    $nominations_updated[$i]['video'] = $value['video'] ?  (int)$value['video'] : '';                }
                     $nominations_updated[$i]['field_60c90d37eae06'] = (string)$value['description'];
-                }
-
             }
 
         }
+
+
 
        update_field('nominations',$nominations_updated, 'user_' . $user_id);
 
@@ -312,7 +320,9 @@ class Ajax extends Controller
                     $newupload =  $this->insert_attachment($file);
                     wp_send_json([
                             'id' => $newupload,
-                            'src' => wp_get_attachment_image_url($newupload, 'medium')
+                            'src' => wp_get_attachment_image_url($newupload, 'medium'),
+                            'url' => wp_get_attachment_url( $newupload ) ,
+
                         ]
                     );
                 }

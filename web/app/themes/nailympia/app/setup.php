@@ -23,7 +23,8 @@ add_action('wp_enqueue_scripts', function () {
     wp_enqueue_style('sage/main.css', asset_path('styles/main.css'), false, null);
     wp_enqueue_script('sage/main.js', asset_path('scripts/main.js'), ['jquery'], null, true);
 
-    wp_enqueue_script('dropzone.js', asset_path('dropzone.js'), ['jquery'], null, true);
+    //wp_enqueue_script('dropzone.js', asset_path('dropzone.js'), ['jquery'], null, true);
+    wp_enqueue_script('sage/dropzone.js', asset_path('scripts/dropzone.js'), ['jquery'], null, true);
 
 
     wp_enqueue_script('fancybox.js', 'https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js', ['jquery'], null, true);
@@ -32,8 +33,9 @@ add_action('wp_enqueue_scripts', function () {
 
     wp_enqueue_style('fancybox.css', 'https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.css', false, null);
 
+    wp_enqueue_script('sage/nail-actions.js', asset_path('scripts/nail-actions.js'), ['jquery'], null, true);
 
-    wp_enqueue_script('action.js', asset_path('action.js'), ['jquery'], null, true);
+    //wp_enqueue_script('action.js', asset_path('action.js'), ['jquery'], null, true);
 
 
 

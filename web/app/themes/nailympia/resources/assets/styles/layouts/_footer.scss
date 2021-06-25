@@ -1,3 +1,30 @@
+.sponsors {
+  .row {
+    border-top: solid 1px #ebebeb;
+  }
+
+  h2 {
+    margin-top: 2rem;
+    font-size: 2.25rem;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  .logos {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+
+    img {
+      max-width: 150px;
+      padding: 0.5rem 0.5rem;
+    }
+  }
+}
+
 footer {
   padding-top: 2.5rem;
   padding-bottom: 2.5rem;

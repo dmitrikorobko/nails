@@ -6,6 +6,12 @@
     ],
     "customizer": [
       "./scripts/customizer.js"
+    ],
+    "dropzone": [
+      "./scripts/dropzone.js"
+    ],
+    "nail-actions": [
+      "./scripts/nail-actions.js"
     ]
   },
   "publicPath": "/app/themes/nailympia",
