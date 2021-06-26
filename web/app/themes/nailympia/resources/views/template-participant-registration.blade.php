@@ -56,6 +56,9 @@ $nominations = new WP_Query( array(
                     <div class="col-12 heading">
                         <h2>{{ __('Categories','sage') }}</h2>
                         <p>{{ __('Choose the category that suits you','sage') }}</p>
+                        <div class="error-message-cat-1-2">
+                        <p>{{ __('Please choose at least one nomination!','sage') }}</p>
+                    </div>  
                     </div>
                 </div>
                 <div class="row">
@@ -180,9 +183,6 @@ $nominations = new WP_Query( array(
 
                         </fieldset>
                     </div>
-                    <div class="col-12 error-message-cat-1-2">
-                        <p>{{ __('Please choose at least one nomination!','sage') }}</p>
-                    </div>  
                     <div class="col-12 error-message-cat-3">
                         <p>{{ __('Please choose at least three live nominations!','sage') }}</p>
                     </div>

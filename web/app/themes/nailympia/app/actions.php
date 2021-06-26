@@ -429,6 +429,8 @@ class Ajax extends Controller
             $company_country = stripcslashes($_POST['country']);
             $add_temp = $_POST['city'] . ' ' . $_POST['postcode'];
             $company_full_address = stripcslashes($add_temp);
+            
+            $company_web = stripcslashes($_POST['sponsorWeb']);
 
         }
 
@@ -437,6 +439,7 @@ class Ajax extends Controller
             'user_email' => $user_email,
             'user_pass' => $user_pass,
             'user_nicename' => $user_nice_name,
+            'user_url' => isset($company_web) ? $company_web : '',
             'display_name' => $user_display_name,
             'role' => $user_role,
             'first_name' => $user_first_last[0],
@@ -478,8 +481,8 @@ class Ajax extends Controller
                 $success = true;
                 $message = "Registrasion success";
             } else {
-                if (isset($user_id->errors['existing_user_login'])) {
-                $message = 'User name already exixts.';
+                if (isset($user_id->errors['existing_user_login']) || isset($user_id->errors['existing_user_email']) ) {
+                $message = 'E-mail address already exists in our system, please choose another e-mail address. <br> Адрес электронной почты уже существует в нашей системе, выберите другой адрес электронной почты.';
                 } else {
                 $message = $user_id->get_error_message();
                 }

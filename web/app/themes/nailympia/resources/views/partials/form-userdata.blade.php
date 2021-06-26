@@ -3,6 +3,9 @@
             <div class="col-12 heading">
                 <h2>{{ __('Information','sage') }}</h2>
             </div>
+            <div class="col-12">
+                <p><span class="red">*</span> - {{ __('required fields','sage') }}</p>
+            </div>
         </div>
         <div class="row">
             <div class="col-12 col-lg-4">
@@ -57,6 +60,12 @@
                     <label for="reg" class="required">{{ __('Registration number','sage') }}</label>
                     <input type="text" class="form-control" id="reg" name="reg" required>
                 </div>
+                <div class="col-12 col-lg-4 d-sm-none d-md-flex">
+                </div>
+                <div class="col-12 col-lg-4 form-group">
+                    <label for="sponsorWeb" class="required">{{ __('Website','sage') }}</label>
+                    <input type="url" placeholder="https://example.com"  pattern="https://.*" class="form-control" id="sponsorWeb" name="sponsorWeb" required>
+                </div>
             @endif
         </div>
         <div class="row">
@@ -91,7 +100,7 @@
                 <input type="text" class="form-control" id="phone" name="phone" required>
             </div>
             <div class="col-12 col-lg-4 form-group">
-                <label for="email" class="required">{{ __('Email','sage') }}</label>
+                <label for="email" class="required">{{ __('Email - used for login','sage') }}</label>
                 <input type="email" class="form-control" id="email" name="email" required>
             </div>
             <div class="col-12 col-lg-4 d-sm-none d-md-flex">
@@ -174,7 +183,7 @@
             <div class="col-12 col-lg-4 form-group">
                 <label for="profileImage">{{ __('Profile photo of the participant','sage') }}</label>
                 <input type="file" class="form-control-file" id="profileImage" name="profileImage">
-                <small id="profileImageHelp" class="form-text text-muted">{{ __('Minimum size - 400X500 px, Maximum filesize - 5mb','sage') }}</small>
+                <small id="profileImageHelp" class="form-text text-muted">{{ __('Minimum size - 400X500 px, Maximum filesize - 5mb, file type - jpg, png, gif','sage') }}</small>
                 <div class="invalid-feedback">
                     {{ __('Please add file!','sage') }}
                 </div>
@@ -188,7 +197,7 @@
             <div class="col-12 col-lg-4 form-group">
                 <label for="profileImage">{{ __('Profile photo','sage') }}</label>
                 <input type="file" class="form-control-file" id="profileImage" name="profileImage">
-                <small id="profileImageHelp" class="form-text text-muted">{{ __('Minimum size - 400X500 px, Maximum filesize - 5mb','sage') }}</small>
+                <small id="profileImageHelp" class="form-text text-muted">{{ __('Minimum size - 400X500 px, Maximum filesize - 5mb, file type - jpg, png, gif','sage') }}</small>
                 <div class="invalid-feedback">
                     {{ __('Please add file!','sage') }}
                 </div>
@@ -225,7 +234,7 @@
             <div class="col-12 col-lg-4 form-group">
                 <label for="companyLogo" class="required">{{ __('Company logo','sage') }}</label>
                 <input type="file" class="form-control-file" id="companyLogo" name="companyLogo" required>
-                <small id="profileImageHelp" class="form-text text-muted">{{ __('Maximum filesize - 5mb','sage') }}</small>
+                <small id="profileImageHelp" class="form-text text-muted">{{ __('Maximum filesize - 5mb, file type - jpg, png, gif, svg','sage') }}</small>
                 <div class="invalid-feedback">
                     {{ __('Please add file!','sage') }}
                 </div>

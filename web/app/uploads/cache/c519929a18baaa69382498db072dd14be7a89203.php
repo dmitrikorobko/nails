@@ -1,4 +1,4 @@
-@php
+<?php
 
 
 $users = get_users( [
@@ -6,7 +6,7 @@ $users = get_users( [
 ] );
 
 
-@endphp
+?>
 
 <section class="sponsors">
   <div class="container">
@@ -44,26 +44,28 @@ $users = get_users( [
         <div id="map"></div>
       </div>
       <div class="col-12 col-lg-6">
-      @option('footer_text')
-      @hasoptions('social_list')
+      <?= get_field('footer_text', 'option'); ?>
+      <?php if (have_rows('social_list', 'option')) : ?>
         <ul class="social">
-        @options('social_list')
+        <?php if (have_rows('social_list', 'option')) : ?><?php while (have_rows('social_list', 'option')) : the_row(); ?>
           <li>
-            <a href="@sub('url')" target="_blank"><img src="@sub('icon', 'url')"></a>
+            <a href="<?= get_sub_field('url'); ?>" target="_blank"><img src="<?= get_sub_field('icon')['url']; ?>"></a>
           </li>
-        @endoptions
+        <?php endwhile; endif; ?>
         </ul>
-      @endhasoptions
+      <?php endif; ?>
       </div>
     </div>
     <div class="row footerbar">
       <div class="col-12 col-lg-5 order-2 order-lg-1 copyright">
-      {{ date('Y') }} {{ get_bloginfo( 'name' ) }}
+      <?php echo e(date('Y')); ?> <?php echo e(get_bloginfo( 'name' )); ?>
+
       </div>
       <div class="col-12 col-lg-7 order-1 order-lg-2">
-      @if (has_nav_menu('footer_menu'))
-        {!! wp_nav_menu(['theme_location' => 'footer_menu']) !!}
-      @endif
+      <?php if(has_nav_menu('footer_menu')): ?>
+        <?php echo wp_nav_menu(['theme_location' => 'footer_menu']); ?>
+
+      <?php endif; ?>
       </div>
     </div>
   </div>
